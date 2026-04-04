@@ -1,0 +1,30 @@
+{
+  "name": "daw/tarea07",
+  "description": "Tarea 07 Desarrollo en Entorno Servidor",
+  "type": "project",
+  "authors": [{
+      "name": "befometh",
+      "email": "cris.acevedo9009@gmail.com"
+    }],
+  "require": {
+    "php": ">=8.0",
+    "jaxon-php/jaxon-core": "^3.2",
+    "jaxon-php/jaxon-dialogs": "^3.0",
+    "ext-pdo": "*"
+  },
+  "config": {
+    "allow-plugins": {
+      "kylekatarnls/update-helper": true
+    },
+    "platform": {
+      "php": "8.2"
+    }
+  },
+  "autoload": {
+    "psr-4": {
+      "Clases\\": "incl/"
+    }
+  },
+  "minimum-stability": "stable",
+  "prefer-stable": true
+}
