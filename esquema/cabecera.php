@@ -6,7 +6,7 @@
     <title>Tarea 07 DSW</title>
     <link rel="stylesheet" href="css/estilo.css">
     <!--Inclusión del motor de Jaxon-->
-    <?php echo $jaxon->getCss(); ?>
-    <?php echo $jaxon->getJs(); ?>
+    <?php echo isset($jaxon)?$jaxon->getCss():""?>
+    <?php echo isset($jaxon)?$jaxon->getJs():""?>
 </head>
 <body>
