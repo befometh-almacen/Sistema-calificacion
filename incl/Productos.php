@@ -1,4 +1,8 @@
 <?php
+/**
+ * @author Cristyan Fernando Morales Acevedo
+ * Motor de Productos, conecta y gestiona todos los procesos vinculados al manejo de la tabla Productos
+ */
 namespace Clases;
 use PDOException;
 
@@ -8,6 +12,9 @@ class Productos extends Conexion
         parent::__construct();
     }
 
+    /** Lista toda la tabla de productos por las columnas id, nombre, familia y pvp
+     * @return array Lista de productos
+     */
     public function listar() {
         $sql = "SELECT p.id, p.nombre, f.nombre AS familia, p.pvp
                     FROM productos p
@@ -23,7 +30,12 @@ class Productos extends Conexion
         }
     }
 
-    public function buscarVotos($id, $us = 0){
+    /** Busca los votos de un producto, tiene dos funciones distintas
+     * @param $id int id del producto
+     * @param $us int id del usuario que consulta, por defecto 0, (en ese caso entrega la media y el número de votos de dicho producto)
+     * @return array|mixed para us==0: valor punto flotante y cantidad de votos, para us!=0: confirma si el usuario ya ha realizado voto
+     */
+    public function buscarVotos($id, $us=0){
         try{
             //1. Permite obtener el promedio y el total de cada producto
             if($us == 0){
@@ -41,14 +53,20 @@ class Productos extends Conexion
         }
     }
 
-    public function votar($idProd, $puntos, $idUser = 1) {
+    /** Función que recibe la intención de votación del usuario.
+     * @param $idProd int id del producto a votar
+     * @param $puntos int valor de 1 a 5 del número de estrellas de dicho producto
+     * @param $idUser int usuario que realiza la votación
+     * @return false|string[]
+     */
+    public function votar($idProd, $puntos, $idUser) {
         try {
-            // 1. Si ya existe el voto, devolvemos false
+            // 1. Si el usuario ya votó, devolvemos false
             if($this->buscarVotos($idProd, $idUser)) {
                 return false;
             }
 
-            // 2. Preparamos e insertamos
+            // 2. Si no ha votado, se realiza una inserción de voto
             $stmt = $this->pdo->prepare("INSERT INTO votos (id_producto, id_usuario, puntuacion) VALUES (?, ?, ?)");
             $resultado = $stmt->execute([$idProd, $idUser, $puntos]);
 
