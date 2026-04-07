@@ -2,8 +2,6 @@
 
 namespace Clases;
 
-use Clases\Conexion;
-
 class Usuarios extends Conexion
 {
     public function __construct()

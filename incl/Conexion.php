@@ -1,4 +1,8 @@
 <?php
+/**
+ * @author Cristyan Fernando Morales Acevedo
+ * Clase Conexión: registra todos los elementos necesarios para la correcta operación con la base de datos practicaUnidad7
+ */
 namespace Clases;
 use PDO;
 use PDOException;

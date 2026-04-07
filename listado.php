@@ -13,8 +13,8 @@ use Jaxon\Response\Response;
 
 $productos = new Productos();
 $lista = $productos->listar();
-$jaxon = jaxon();
-$jaxon->setOption('core.debug.on', false);
+$jaxon = jaxon();       //Creación de elemento e implementación de funciones Jaxon
+$jaxon->setOption('core.debug.on', false);                      //Según si es "true" o "false" activa o desactiva el modo debug de Jaxon respectivamente
 $jaxon->setOption('core.prefix.function', 'jax_');              //Se cambia el prefijo de registro de funciones, por defecto jaxon_ a jax_
 $jaxon->register(Jaxon::CALLABLE_FUNCTION, 'realizarVoto');     //Se registra la función que va a permitir la asincronía
 
@@ -26,7 +26,6 @@ if ($jaxon->canProcessRequest()) {
  */
 function crearLista()
 {
-    print("Aqui".$_SESSION["id_usuario"]);
     global $productos;
     $lista = $productos->listar();
     $tabla = "";
@@ -44,8 +43,14 @@ function crearLista()
             }
             $tabla .= "</select></td><td>";
             //Se crea el botón que va a dar lugar a la solicitud asíncrona, (función con jax_realizarVoto())
-            $tabla .= "<button type='button' class='button is-primary' onclick='this.disabled=true; jax_realizarVoto(" . $fila["id"] . ", document.getElementById(\"select" . $fila["id"] . "\").value); return false; '>Votar</button></td></tr>";
+            $tabla .= "<button 
+                type='button' 
+                class='button is-primary' 
+                onclick='this.disabled=true; jax_realizarVoto(" . $fila["id"] . ", document.getElementById(\"select" . $fila["id"] . "\").value); return false; 
+            '>Votar</button></td></tr>";
         }
+    } else {
+        $tabla.= "<tr><td colspan='7'>No ha sido posible encontrar elementos</td></tr>";
     }
     echo $tabla;
 }
@@ -117,7 +122,7 @@ include __DIR__ . '/esquema/cabecera.php';
         <div class="container">
             <h1 class="title">Catálogo de Productos</h1>
             <h2 class="subtitle">Valoraciones en tiempo real</h2>
-            <h2 class="link"><a href="logout.php">Volver al inicio</a></h2>
+            <h2 class="link"><a class="link" href="logout.php">Cerrar sesión</a></h2>
         </div>
     </div>
 </header>

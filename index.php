@@ -9,10 +9,11 @@ if (isset($_SESSION['id_usuario'])) {
     exit();
 }
 //Contraseñas de prueba
-echo "admin ->".password_hash("admin", PASSWORD_DEFAULT)."<br>";
-echo "user1 ->".password_hash(1234, PASSWORD_DEFAULT)."<br>";
-echo "user2 ->".password_hash("abcd", PASSWORD_DEFAULT)."<br>";
-echo "user3 ->".password_hash(0000, PASSWORD_DEFAULT);
+    /* echo "admin ->".password_hash("admin", PASSWORD_DEFAULT)."<br>";
+    *  echo "user1 ->".password_hash(1234, PASSWORD_DEFAULT)."<br>";
+    *  echo "user2 ->".password_hash("abcd", PASSWORD_DEFAULT)."<br>";
+    *  echo "user3 ->".password_hash(0000, PASSWORD_DEFAULT);
+    */
 
 //Si la tabla ingresa por "POST" comprueba la contraseña, si es correcta graba la sesión
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
